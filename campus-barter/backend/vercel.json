@@ -1,0 +1,20 @@
+# Vercel configuration for Flask backend
+[build]
+  command = "pip install -r requirements.txt"
+  functions = "api"
+
+[functions]
+  directory = "api"
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+[[headers]]
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Origin, X-Requested-With, Content-Type, Accept, Authorization"
